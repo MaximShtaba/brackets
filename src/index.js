@@ -1,22 +1,16 @@
-module.exports = function check(str, bracketsConfig){
-	let stack = [];
-	let brackets = {
-		")": "(",
-		"}": "{",
-		"]": "[",
-	}
+module.exports = function check(str, bracketsConfig) {
+	if (str.length%2!==0) return false
+	let arr = [];
 	for (let i = 0; i < str.length; i++) {
-		let curent = str[i];
-		if (isClosedBracket(curent)) {
-			if (brackets[curent] !== stack.pop()) return false;
-		} else {
-			stack.push(curent);
-		}
+	 for (let j = 0; j<bracketsConfig.length; j++){
+		
+		if (str[i] === bracketsConfig[j][0]) { arr.push(str[i])}
+		
+		else if (arr[arr.length-1] !== bracketsConfig[j][1] ) {arr.pop()}
+		
+	 }
+	
+
 	}
-	return stack.length === 0;
-}
-
-
-function isClosedBracket(ch) {
-	return ["}", ")", "]",].includes(ch) > -1
+ if (arr.length === 0) {return true} else {return false }
 }
